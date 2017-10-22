@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:03479978c32cb0bd0ad5cfdd1526cc2f:57b9004aab21c871ad47e623fed2a0b4:30b52f0a39ff121f1ba502489bc0e3ca$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+-->
+<TextureAtlas imagePath="MenuButtons.png" width="3092" height="3320">
+    <sprite n="ContinueButton.png" x="2" y="2" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="ContinuePressed.png" x="1032" y="2" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="ContinueSelected.png" x="2062" y="2" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="CreditsButton.png" x="2" y="476" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="CreditsPressed.png" x="1032" y="476" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="CreditsSelected.png" x="2062" y="476" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="ExitButton.png" x="2" y="950" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="ExitPressed.png" x="1032" y="950" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="ExitSelected.png" x="2062" y="950" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="LoadGameButton.png" x="2" y="1424" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="LoadGamePressed.png" x="1032" y="1424" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="LoadGameSelected.png" x="2062" y="1424" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="NewGameButton.png" x="2" y="1898" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="NewGamePressed.png" x="1032" y="1898" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="NewGameSelected.png" x="2062" y="1898" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="OptionsButton.png" x="2" y="2372" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="OptionsPressed.png" x="1032" y="2372" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="OptionsSelected.png" x="2062" y="2372" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="SaveButton.png" x="2" y="2846" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="SavePressed.png" x="1032" y="2846" w="1028" h="472" pX="0.5" pY="0.5"/>
+    <sprite n="SaveSelected.png" x="2062" y="2846" w="1028" h="472" pX="0.5" pY="0.5"/>
+</TextureAtlas>

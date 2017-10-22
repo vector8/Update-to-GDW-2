@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with TexturePacker http://www.codeandweb.com/texturepacker-->
+<!-- $TexturePacker:SmartUpdate:814bd82d3b76e9977d723f7578425efb:b5d36a64f0fc31097a6973834ba2e2a0:ec000f9ac5af181ca7f442f9b58cf3e5$ -->
+<!--Format:
+n  => name of the sprite
+x  => sprite x pos in texture
+y  => sprite y pos in texture
+w  => sprite width (may be trimmed)
+h  => sprite height (may be trimmed)
+pX => x pos of the pivot point (relative to sprite width)
+pY => y pos of the pivot point (relative to sprite height)
+oX => sprite's x-corner offset (only available if trimmed)
+oY => sprite's y-corner offset (only available if trimmed)
+oW => sprite's original width (only available if trimmed)
+oH => sprite's original height (only available if trimmed)
+r => 'y' only set if sprite is rotated
+-->
+<TextureAtlas imagePath="Options.png" width="3224" height="1418">
+    <sprite n="FOV.png" x="2150" y="828" w="1072" h="426" pX="0.5" pY="0.5"/>
+    <sprite n="FullScreen.png" x="1944" y="400" w="1072" h="426" pX="0.5" pY="0.5"/>
+    <sprite n="FullScreenOff.png" x="57" y="2" w="664" h="324" pX="0.5" pY="0.5"/>
+    <sprite n="FullScreenOn.png" x="723" y="2" w="664" h="324" pX="0.5" pY="0.5"/>
+    <sprite n="KeyMapping.png" x="2" y="828" w="1072" h="426" pX="0.5" pY="0.5"/>
+    <sprite n="MasterVolume.png" x="1076" y="828" w="1072" h="426" pX="0.5" pY="0.5"/>
+    <sprite n="MouseSensitivity.png" x="870" y="400" w="1072" h="426" pX="0.5" pY="0.5"/>
+    <sprite n="Slider.png" x="2" y="1256" w="2203" h="160" pX="0.5" pY="0.5"/>
+    <sprite n="SliderTab.png" x="2" y="2" w="53" h="95" pX="0.5" pY="0.5"/>
+    <sprite n="backbutton.png" x="2257" y="2" w="866" h="396" pX="0.5" pY="0.5"/>
+    <sprite n="backbuttonpressed.png" x="2" y="400" w="866" h="396" pX="0.5" pY="0.5"/>
+    <sprite n="backbuttonselected.png" x="1389" y="2" w="866" h="396" pX="0.5" pY="0.5"/>
+</TextureAtlas>
