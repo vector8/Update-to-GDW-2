@@ -36,6 +36,15 @@
     <ClInclude Include="Timer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Light.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Utilities.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -59,6 +68,15 @@
     <ClCompile Include="Timer.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Light.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Utilities.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Passthrough.frag">
@@ -75,6 +93,15 @@
     </None>
     <None Include="shaders\Phong.vert">
       <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\UVMap.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\UVMap.vert">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="Utilities.tpp">
+      <Filter>Source Files</Filter>
     </None>
   </ItemGroup>
 </Project>

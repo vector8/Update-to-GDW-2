@@ -1,0 +1,7 @@
+syntax: glob
+Engine/.vs/
+Engine/Debug/Engine.exe
+Engine/Debug/Engine.ilk
+Engine/Debug/Engine.pdb
+Engine/Engine/Debug/
+GDW2/.vs/

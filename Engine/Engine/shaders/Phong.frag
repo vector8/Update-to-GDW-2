@@ -1,19 +1,33 @@
 #version 420
 
-uniform vec4 lightPos;
+#define NUM_POINT_LIGHTS 1
 
-// color
-uniform vec3 lightAmbient;
-uniform vec3 lightDiffuse;
-uniform vec3 lightSpecular;
+struct PointLight
+{
+	vec4 position;
 
-// scalars
-uniform float lightSpecularExponent;
-uniform float attenuationConstant;
-uniform float attenuationLinear;
-uniform float attenuationQuadratic;
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+	
+	float constantAttenuation;
+	float linearAttenuation;
+	float quadraticAttenuation;
+};
 
-uniform sampler2D uTex; 
+struct Material
+{
+	sampler2D diffuse;
+	sampler2D specular;
+
+	vec3 hue;
+	
+	float specularExponent;
+};
+
+uniform PointLight pointLights[NUM_POINT_LIGHTS];
+
+uniform Material material; 
 
 in vec3 position;
 in vec2 texCoord;
@@ -21,37 +35,46 @@ in vec3 normal;
 
 out vec4 outColor;
 
+vec3 calculatePointLight(PointLight light, vec3 norm, vec4 materialDiffuse, vec4 materialSpecular);
+
 void main()
 {
-	outColor.rgb = lightAmbient;
-
 	// account for rasterizer interpolating
 	vec3 norm = normalize(normal);
 
-	vec3 lightVec = lightPos.xyz - position;
-	float dist = length(lightVec);
-	vec3 lightDir = lightVec / dist;
-	
-	float NdotL = dot(norm, lightDir);
-	
-	if(NdotL > 0.0)
+	vec4 diffuse = texture(material.diffuse, texCoord);
+	vec4 specular = texture(material.specular, texCoord);
+
+	for(int i = 0; i < NUM_POINT_LIGHTS; i++)
 	{
-		// the light contributes to this surface
-
-		// Calculate the attenuation (falloff)
-		float attenuation = 1.0 / (attenuationConstant + (attenuationLinear * dist) + (attenuationQuadratic * dist * dist));
-
-		// Calculate the diffuse contribution
-		outColor.rgb += lightDiffuse * NdotL * attenuation;
-
-		// Blinn-Phong half vector
-		float NdotHV = max(dot(norm, normalize(lightDir + normalize(-position))), 0.0);
-
-		// Calculate the specular contribution
-		outColor.rgb += lightSpecular * pow(NdotHV, lightSpecularExponent) * attenuation;
+		outColor.rgb += calculatePointLight(pointLights[i], norm, diffuse, specular);
 	}
 
-	vec4 textureColor = texture(uTex, texCoord);
-	outColor.rgb *= textureColor.rgb;
-	outColor.a = textureColor.a;
+	outColor.rgb *= material.hue;
+
+	outColor.a = diffuse.a;
+}
+
+vec3 calculatePointLight(PointLight light, vec3 norm, vec4 materialDiffuse, vec4 materialSpecular)
+{
+	vec3 lightVec = light.position.xyz - position;
+	float dist = length(lightVec);
+	vec3 lightDir = lightVec / dist;
+
+	// Attenuation
+	float attenuation = 1.0 / (light.constantAttenuation + (light.linearAttenuation * dist) + (light.quadraticAttenuation * dist * dist));
+	
+	// Ambient
+	vec3 ambient = attenuation * light.ambient;
+
+	// Diffuse
+	float NdotL = max(dot(norm, lightDir), 0.0);
+	vec3 diffuse = NdotL * attenuation * light.diffuse * materialDiffuse.rgb;
+
+	// Specular
+	vec3 reflectDir = reflect(-lightDir, norm);
+	float VdotR = max(dot(normalize(-position), reflectDir), 0.0);
+	vec3 specular = pow(VdotR, material.specularExponent) * attenuation * light.specular * materialSpecular.rgb;
+
+	return ambient + diffuse + specular;
 }
