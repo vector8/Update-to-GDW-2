@@ -3,6 +3,8 @@
 #include "Timer.h"
 #include "ShaderProgram.h"
 #include "GameObject.h"
+#include <memory>
+#include "InputManager.h"
 
 #define WINDOW_WIDTH 800
 #define WINDOW_HEIGHT 600
@@ -18,18 +20,14 @@ public:
 	void update();
 	void draw();
 
-	// Input callback functions
-	void keyboardDown(unsigned char key, int mouseX, int mouseY);
-	void keyboardUp(unsigned char key, int mouseX, int mouseY);
-	void mouseClicked(int button, int state, int x, int y);
-	void mouseMoved(int x, int y);
-
 	// Data Member
-	Timer* updateTimer = nullptr;
+	std::shared_ptr<Timer> updateTimer = nullptr;
 	GameObject monkey1, monkey2;
 	ShaderProgram passThrough;
 	ShaderProgram phongNoTexture;
 	ShaderProgram phong;
+	ShaderProgram uvMap;
+	std::vector<Light> pointLights;
 
 	glm::mat4 cameraTransform;
 	glm::mat4 cameraProjection;

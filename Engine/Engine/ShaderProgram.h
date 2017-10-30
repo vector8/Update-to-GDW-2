@@ -3,6 +3,7 @@
 #include <GL\glew.h>
 #include <glm\glm.hpp>
 #include <string>
+#include <map>
 
 class ShaderProgram
 {
@@ -51,6 +52,7 @@ private:
 	GLuint vertexShader = 0;
 	GLuint fragShader = 0;
 	GLuint program = 0;
+	std::map<std::string, int> uniformLocations;
 
 	std::string readFile(const std::string &fileName) const;
 

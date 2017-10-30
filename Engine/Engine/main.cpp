@@ -2,12 +2,14 @@
 #include <GL\glut.h>
 #include <GL\freeglut.h>
 #include <iostream>
+#include <memory>
 
 #include "Game.h"
+#include "InputManager.h"
 
 const int FRAME_DELAY = 1000 / FRAMES_PER_SECOND;
 
-Game* game;
+std::shared_ptr<Game> game;
 
 void DisplayCallbackFunction(void) 
 {
@@ -16,12 +18,12 @@ void DisplayCallbackFunction(void)
 
 void KeyboardCallbackFunction(unsigned char key, int x, int y)
 {
-	game->keyboardDown(key, x, y);
+	InputManager::keyboardDown(key, x, y);
 }
 
 void KeyboardUpCallbackFunction(unsigned char key, int x, int y)
 {
-	game->keyboardUp(key, x, y);
+	InputManager::keyboardUp(key, x, y);
 }
 
 void TimerCallbackFunction(int value)
@@ -30,16 +32,18 @@ void TimerCallbackFunction(int value)
 
 	glutPostRedisplay();
 	glutTimerFunc(FRAME_DELAY, TimerCallbackFunction, 0);
+
+	InputManager::reset();
 }
 
 void MouseClickCallbackFunction(int button, int state, int x, int y)
 {
-	game->mouseClicked(button, state, x, y);
+	InputManager::mouseClicked(button, state, x, y);
 }
 
 void MouseMotionCallbackFunction(int x, int y)
 {
-	game->mouseMoved(x, y);
+	InputManager::mouseMoved(x, y);
 }
 
 int main(int argc, char **argv)
@@ -70,7 +74,7 @@ int main(int argc, char **argv)
 	glutTimerFunc(1, TimerCallbackFunction, 0);
 
 	// initialize game
-	game = new Game();
+	game = std::make_shared<Game>();
 	game->initializeGame();
 
 	// start game

@@ -3,6 +3,13 @@
 #include <GL\glew.h>
 #include <string>
 
+enum TextureType
+{
+	Diffuse,
+	Specular,
+	Normal
+};
+
 class Texture
 {
 public:
