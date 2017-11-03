@@ -1,9 +1,9 @@
 #include "Timer.h"
-#include "GL\glut.h"
+#include <GLFW\glfw3.h>
 
 Timer::Timer()
 {
-	previousTime = glutGet(GLUT_ELAPSED_TIME);
+	previousTime = glfwGetTime();
 	tick();
 }
 
@@ -14,7 +14,7 @@ Timer::~Timer()
 // update the timer
 float Timer::tick()
 {
-	currentTime = glutGet(GLUT_ELAPSED_TIME);
+	currentTime = glfwGetTime();
 	elapsedTime = currentTime - previousTime;
 	previousTime = currentTime;
 	return elapsedTime;
@@ -23,13 +23,13 @@ float Timer::tick()
 // return the delta time in milliseconds
 float Timer::getElapsedTimeMS()
 {
-	return elapsedTime;
+	return elapsedTime * 1000.f;
 }
 
 // return the delta time in seconds
 float Timer::getElapsedTimeSeconds()
 {
-	return elapsedTime / 1000.f;
+	return elapsedTime;
 }
 
 // get time since program start

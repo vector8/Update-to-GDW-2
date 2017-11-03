@@ -1,6 +1,6 @@
 #include "Game.h"
 #include <iostream>
-#include <GL\glut.h>
+#include <GLFW\glfw3.h>
 #include <glm\gtc\matrix_transform.hpp>
 #include <glm\gtc\type_ptr.hpp>
 #include "Mesh.h"
@@ -93,64 +93,61 @@ void Game::update()
 
 	float deltaTime = updateTimer->getElapsedTimeSeconds();
 
-	if (InputManager::isKeyDownThisFrame(Keys::Esc) || InputManager::isKeyDownThisFrame(Keys::Q))
+	if (InputManager::isKeyDownThisFrame(Keys::KEY_ESCAPE) || InputManager::isKeyDownThisFrame(Keys::KEY_Q))
 	{
 		exit(1);
 	}
 
-	/*if (InputManager::isKeyDownThisFrame(Keys::R))
-	{
+	if(InputManager::isKeyDownThisFrame(Keys::KEY_R))
 		shouldRotate = !shouldRotate;
-	}*/
-	shouldRotate = InputManager::isKeyDown(Keys::R);
 
 	float speed = 1.f;
-	if (InputManager::isModifierDown(Modifiers::Shift))
+	if (InputManager::isKeyDown(Keys::KEY_LEFT_SHIFT))
 	{
 		speed = 2.f;
 	}
 
 	if (shouldRotate)
 	{
-		monkey1.rotate = glm::rotate(monkey1.rotate, speed * deltaTime * (glm::pi<float>() / 4.f), glm::vec3(0.f, 1.f, 0.f));
+		monkey1.rotate = glm::rotate(monkey1.rotate, deltaTime * (glm::pi<float>() / 4.f), glm::vec3(0.f, 1.f, 0.f));
 	}
 
-	if (InputManager::isKeyDown(Keys::W))
+	if (InputManager::isKeyDown(Keys::KEY_W))
 	{
-		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(0.f, deltaTime * 1.f, 0.f));
+		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(0.f, deltaTime * speed, 0.f));
 	}
 
-	if (InputManager::isKeyDown(Keys::A))
+	if (InputManager::isKeyDown(Keys::KEY_A))
 	{
-		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(-deltaTime * 1.f, 0.f, 0.f));
+		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(-deltaTime * speed, 0.f, 0.f));
 	}
 
-	if (InputManager::isKeyDown(Keys::S))
+	if (InputManager::isKeyDown(Keys::KEY_S))
 	{
-		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(0.f, -deltaTime * 1.f, 0.f));
+		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(0.f, -deltaTime * speed, 0.f));
 	}
 
-	if (InputManager::isKeyDown(Keys::D))
+	if (InputManager::isKeyDown(Keys::KEY_D))
 	{
-		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(deltaTime * 1.f, 0.f, 0.f));
+		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(deltaTime * speed, 0.f, 0.f));
 	}
 
-	if (InputManager::isKeyDown(Keys::Z))
+	if (InputManager::isKeyDown(Keys::KEY_Z))
 	{
-		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(0.f, 0.f, deltaTime * 1.f));
+		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(0.f, 0.f, deltaTime * speed));
 	}
 
-	if (InputManager::isKeyDown(Keys::X))
+	if (InputManager::isKeyDown(Keys::KEY_X))
 	{
-		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(0.f, 0.f, -deltaTime * 1.f));
+		monkey1.translate = glm::translate(monkey1.translate, glm::vec3(0.f, 0.f, -deltaTime * speed));
 	}
 
-	if (InputManager::isKeyDown(Keys::P))
+	if (InputManager::isKeyDown(Keys::KEY_P))
 	{
 		monkey1.scale += deltaTime * 1.f;
 	}
 
-	if (InputManager::isKeyDown(Keys::O))
+	if (InputManager::isKeyDown(Keys::KEY_O))
 	{
 		monkey1.scale -= deltaTime * 1.f;
 	}
@@ -166,6 +163,10 @@ void Game::draw()
 	// render stuff
 	monkey1.draw(phong, cameraTransform, cameraProjection, pointLights);
 	monkey2.draw(phong, cameraTransform, cameraProjection, pointLights);
+}
 
-	glutSwapBuffers();
+void Game::mainLoop()
+{
+	update();
+	draw();
 }

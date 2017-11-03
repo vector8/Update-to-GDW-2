@@ -142,7 +142,7 @@ int ShaderProgram::getAttribLocation(const std::string &attribName)
 // Returns -1 if the uniform does not exist
 int ShaderProgram::getUniformLocation(const std::string &uniformName)
 {
-	std::map<std::string, int>::iterator itr = uniformLocations.find(uniformName);
+	std::unordered_map<std::string, int>::iterator itr = uniformLocations.find(uniformName);
 	if (itr == uniformLocations.end())
 	{
 		int loc = glGetUniformLocation(program, uniformName.c_str());
