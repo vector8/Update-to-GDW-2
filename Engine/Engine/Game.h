@@ -19,6 +19,7 @@ public:
 	void initializeGame();
 	void update();
 	void draw();
+	void mainLoop();
 
 	// Data Member
 	std::shared_ptr<Timer> updateTimer = nullptr;
@@ -34,12 +35,4 @@ public:
 
 private:
 	bool shouldRotate = false;
-	bool wKeyDown = false;
-	bool aKeyDown = false;
-	bool sKeyDown = false;
-	bool dKeyDown = false;
-	bool zKeyDown = false;
-	bool xKeyDown = false;
-	bool pKeyDown = false;
-	bool oKeyDown = false;
 };
