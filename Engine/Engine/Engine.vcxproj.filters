@@ -45,6 +45,9 @@
     <ClInclude Include="Utilities.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="PerlinNoise.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Game.cpp">
@@ -77,6 +80,9 @@
     <ClCompile Include="Utilities.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="PerlinNoise.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="shaders\Passthrough.frag">
@@ -102,6 +108,12 @@
     </None>
     <None Include="Utilities.tpp">
       <Filter>Source Files</Filter>
+    </None>
+    <None Include="shaders\Perlin.frag">
+      <Filter>Shaders</Filter>
+    </None>
+    <None Include="shaders\Perlin.vert">
+      <Filter>Shaders</Filter>
     </None>
   </ItemGroup>
 </Project>
