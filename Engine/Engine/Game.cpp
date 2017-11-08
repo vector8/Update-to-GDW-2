@@ -29,54 +29,10 @@ void Game::initializeGame()
 
 	glEnable(GL_DEPTH_TEST);
 
-	// TODO: DELETE THIS
-	time_t timer;
-	PerlinNoise pn(time(&timer));
-#define DIM 512
-	for (int i = 0; i < DIM; i++)
-	{
-		for (int j = 0; j < DIM; j++)
-		{
-			vertexData.push_back(j);
-			vertexData.push_back(i);
-			double x = (double)j / ((double)DIM);
-			double y = (double)i / ((double)DIM);
-			double n = pn.noise(10 * x, 10 * y, 0.8);
-			//n = n - floor(n);
-			colorData.push_back((float)n);
-		}
-	}
-
-	// Send data to OpenGL
-	glGenVertexArrays(1, &vaoNoise);
-	glGenBuffers(1, &vboVertices);
-	glGenBuffers(1, &vboColor);
-
-	glBindVertexArray(vaoNoise);
-
-	glEnableVertexAttribArray(0);	// Vertex
-	glEnableVertexAttribArray(1);	// Color
-
-	// Vertices
-	glBindBuffer(GL_ARRAY_BUFFER, vboVertices);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * vertexData.size(), &vertexData[0], GL_STATIC_DRAW);
-	glVertexAttribPointer((GLuint)0, 2, GL_FLOAT, GL_FALSE, sizeof(float) * 2, (char*)0);
-
-	// Color
-	glBindBuffer(GL_ARRAY_BUFFER, vboColor);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(float) * colorData.size(), &colorData[0], GL_STATIC_DRAW);
-	glVertexAttribPointer((GLuint)1, 1, GL_FLOAT, GL_FALSE, sizeof(float), (char*)0);
-
-	// Cleanup
-	glBindBuffer(GL_ARRAY_BUFFER, GL_NONE);
-	glBindVertexArray(GL_NONE);
-
-	// END TODO
-
 	Light light1;
 
-	light1.position = glm::vec4(4.f, 4.f, 4.f, 1.f);
-	light1.originalPosition = glm::vec4(4.f, 4.f, 4.f, 1.f);
+	light1.positionOrDirection = glm::vec4(-4.f, -4.f, -4.f, 1.f);
+	light1.originalPosition = glm::vec4(-4.f, -4.f, -4.f, 1.f);
 	light1.ambient = glm::vec3(0.05f, 0.05f, 0.05f);
 	light1.diffuse = glm::vec3(0.7f, 0.7f, 0.7f);
 	light1.specular = glm::vec3(1.f, 1.f, 1.f);
@@ -86,6 +42,11 @@ void Game::initializeGame()
 	light1.quadraticAttenuation = 0.01f;
 
 	pointLights.push_back(light1);
+
+	directionalLight.positionOrDirection = glm::vec4(-1.f, -1.f, -1.f, 1.f);
+	directionalLight.ambient = glm::vec3(0.05f, 0.05f, 0.05f);
+	directionalLight.diffuse = glm::vec3(0.7f, 0.7f, 0.7f);
+	directionalLight.specular = glm::vec3(1.f, 1.f, 1.f);
 
 	if (!passThrough.load("shaders/passthrough.vert", "shaders/passthrough.frag"))
 	{
@@ -201,18 +162,12 @@ void Game::update()
 
 void Game::draw()
 {
-	glClearColor(0.f, 0.f, 1.f, 0.f);
+	glClearColor(0.f, 0.f, 0.f, 0.f);
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
 	// render stuff
-	/*monkey1.draw(phong, cameraTransform, cameraProjection, pointLights);
-	monkey2.draw(phong, cameraTransform, cameraProjection, pointLights);*/
-
-	noisemapShader.bind();
-	glBindVertexArray(vaoNoise);
-	glDrawArrays(GL_POINTS, 0, colorData.size());
-	glBindVertexArray(GL_NONE);
-	noisemapShader.unbind();
+	monkey1.draw(phong, cameraTransform, cameraProjection, pointLights, directionalLight);
+	monkey2.draw(phong, cameraTransform, cameraProjection, pointLights, directionalLight);
 }
 
 void Game::mainLoop()

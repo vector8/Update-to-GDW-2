@@ -27,5 +27,5 @@ public:
 	void loadTexture(TextureType type, std::string texFile);
 
 	void draw(ShaderProgram &shader, glm::mat4 &cameraTransform, 
-		glm::mat4 &cameraProjection, std::vector<Light> &pointLights);
+		glm::mat4 &cameraProjection, std::vector<Light> &pointLights, Light &directionalLight);
 };

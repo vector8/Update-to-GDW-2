@@ -8,7 +8,7 @@ public:
 	~Light();
 
 	glm::vec4 originalPosition;
-	glm::vec4 position;
+	glm::vec4 positionOrDirection;
 
 	glm::vec3 ambient;
 	glm::vec3 diffuse;

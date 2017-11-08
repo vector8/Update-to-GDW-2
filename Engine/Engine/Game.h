@@ -6,8 +6,8 @@
 #include <memory>
 #include "InputManager.h"
 
-#define WINDOW_WIDTH 512
-#define WINDOW_HEIGHT 512
+#define WINDOW_WIDTH 800
+#define WINDOW_HEIGHT 600
 #define FRAMES_PER_SECOND 60
 
 class Game
@@ -29,6 +29,7 @@ public:
 	ShaderProgram phong;
 	ShaderProgram uvMap;
 	ShaderProgram noisemapShader;
+	Light directionalLight;
 	std::vector<Light> pointLights;
 
 	GLuint vaoNoise = 0;
