@@ -15,6 +15,15 @@ struct PointLight
 	float quadraticAttenuation;
 };
 
+struct DirectionalLight
+{
+	vec4 direction;
+
+	vec3 ambient;
+	vec3 diffuse;
+	vec3 specular;
+};
+
 struct Material
 {
 	sampler2D diffuse;
@@ -27,6 +36,8 @@ struct Material
 
 uniform PointLight pointLights[NUM_POINT_LIGHTS];
 
+uniform DirectionalLight directionalLight;
+
 uniform Material material; 
 
 in vec3 position;
@@ -37,6 +48,8 @@ out vec4 outColor;
 
 vec3 calculatePointLight(PointLight light, vec3 norm, vec4 materialDiffuse, vec4 materialSpecular);
 
+vec3 calculateDirectionalLight(DirectionalLight light, vec3 norm, vec4 materialDiffuse, vec4 materialSpecular);
+
 void main()
 {
 	// account for rasterizer interpolating
@@ -44,6 +57,8 @@ void main()
 
 	vec4 diffuse = texture(material.diffuse, texCoord);
 	vec4 specular = texture(material.specular, texCoord);
+
+	outColor.rgb = calculateDirectionalLight(directionalLight, norm, diffuse, specular);
 
 	for(int i = 0; i < NUM_POINT_LIGHTS; i++)
 	{
@@ -75,6 +90,25 @@ vec3 calculatePointLight(PointLight light, vec3 norm, vec4 materialDiffuse, vec4
 	vec3 reflectDir = reflect(-lightDir, norm);
 	float VdotR = max(dot(normalize(-position), reflectDir), 0.0);
 	vec3 specular = pow(VdotR, material.specularExponent) * attenuation * light.specular * materialSpecular.rgb;
+
+	return ambient + diffuse + specular;
+}
+
+vec3 calculateDirectionalLight(DirectionalLight light, vec3 norm, vec4 materialDiffuse, vec4 materialSpecular)
+{
+	vec3 lightDir = normalize(-light.direction).xyz;
+
+	// Ambient
+	vec3 ambient = light.ambient;
+
+	// Diffuse
+	float NdotL = max(dot(norm, lightDir), 0.0);
+	vec3 diffuse = NdotL * light.diffuse * materialDiffuse.rgb;
+
+	// Specular
+	vec3 reflectDir = reflect(-lightDir, norm);
+	float VdotR = max(dot(normalize(-position), reflectDir), 0.0);
+	vec3 specular = pow(VdotR, material.specularExponent) * light.specular * materialSpecular.rgb;
 
 	return ambient + diffuse + specular;
 }
