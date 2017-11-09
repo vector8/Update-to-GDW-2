@@ -4,6 +4,7 @@
 #include <GLFW\glfw3.h>
 
 glm::vec2 InputManager::mousePos;
+glm::vec2 InputManager::scrollOffset;
 std::unordered_map<int, bool> InputManager::mouseButtonsDown;
 std::unordered_map<int, bool> InputManager::mouseButtonsDownThisFrame;
 std::unordered_map<int, bool> InputManager::mouseButtonsUpThisFrame;
@@ -62,6 +63,12 @@ void InputManager::mouseMoved(float x, float y)
 	mousePos.y = y;
 }
 
+void InputManager::scrollEvent(float xoffset, float yoffset)
+{
+	scrollOffset.x = xoffset;
+	scrollOffset.y = yoffset;
+}
+
 bool InputManager::isKeyDown(Keys key)
 {
 	return keysDown[(int)key];
@@ -80,6 +87,11 @@ bool InputManager::isKeyUpThisFrame(Keys key)
 glm::vec2 InputManager::getMousePosition()
 {
 	return mousePos;
+}
+
+glm::vec2 InputManager::getScrollOffset()
+{
+	return scrollOffset;
 }
 
 bool InputManager::isMouseButtonDown(MouseButtons button)
@@ -118,4 +130,6 @@ void InputManager::reset()
 	{
 		itr->second = false;
 	}
+
+	scrollOffset = glm::vec2(0.f);
 }
