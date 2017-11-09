@@ -31,6 +31,11 @@ void framebufferSizeCallback(GLFWwindow* window, int width, int height)
 	glViewport(0, 0, width, height);
 }
 
+void scrollCallback(GLFWwindow* window, double xoffset, double yoffset)
+{
+	InputManager::scrollEvent((float)xoffset, (float)yoffset);
+}
+
 int main(int argc, char **argv)
 {
 	glfwInit();
@@ -64,6 +69,7 @@ int main(int argc, char **argv)
 	glfwSetKeyCallback(window, keyboardCallback);
 	glfwSetMouseButtonCallback(window, mouseButtonCallback);
 	glfwSetCursorPosCallback(window, cursorPositionCallback);
+	glfwSetScrollCallback(window, scrollCallback);
 
 	// initialize game
 	game = std::make_shared<Game>();

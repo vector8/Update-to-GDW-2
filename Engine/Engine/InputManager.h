@@ -145,12 +145,14 @@ public:
 	static void keyEvent(int key, int scancode, int action, int mods);
 	static void mouseButtonEvent(int button, int action, int mods);
 	static void mouseMoved(float x, float y);
+	static void scrollEvent(float xoffset, float yoffset);
 
 	static bool isKeyDown(Keys key);
 	static bool isKeyDownThisFrame(Keys key);
 	static bool isKeyUpThisFrame(Keys key);
 
 	static glm::vec2 getMousePosition();
+	static glm::vec2 getScrollOffset();
 
 	static bool isMouseButtonDown(MouseButtons button);
 	static bool isMouseButtonDownThisFrame(MouseButtons button);
@@ -162,6 +164,7 @@ private:
 	InputManager() {};
 
 	static glm::vec2 mousePos;
+	static glm::vec2 scrollOffset;
 	static std::unordered_map<int, bool> mouseButtonsDown;
 	static std::unordered_map<int, bool> mouseButtonsDownThisFrame;
 	static std::unordered_map<int, bool> mouseButtonsUpThisFrame;

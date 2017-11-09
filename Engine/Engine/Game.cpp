@@ -155,6 +155,8 @@ void Game::update()
 		moveDirection = glm::normalize(moveDirection);
 	}
 
+	std::cout << InputManager::getScrollOffset().x << " " << InputManager::getScrollOffset().y << std::endl;
+
 	cameraTranslate = glm::translate(cameraTranslate, moveDirection * speed * deltaTime);
 
 	cameraTransform = glm::inverse(cameraTranslate * cameraRotate);
