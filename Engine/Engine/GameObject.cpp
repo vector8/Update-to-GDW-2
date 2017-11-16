@@ -58,6 +58,7 @@ void GameObject::draw(ShaderProgram &shader, glm::mat4 &cameraTransform,
 	shader.sendUniform("directionalLight.ambient", directionalLight.ambient);
 	shader.sendUniform("directionalLight.diffuse", directionalLight.diffuse);
 	shader.sendUniform("directionalLight.specular", directionalLight.specular);
+
 	glActiveTexture(GL_TEXTURE0);
 	mat.diffuse.bind();
 

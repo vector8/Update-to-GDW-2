@@ -43,7 +43,7 @@ void Game::initializeGame()
 
 	pointLights.push_back(light1);
 
-	directionalLight.positionOrDirection = glm::vec4(-1.f, -1.f, -1.f, 1.f);
+	directionalLight.positionOrDirection = glm::vec4(-1.f, -1.f, -1.f, 0.f);
 	directionalLight.ambient = glm::vec3(0.05f, 0.05f, 0.05f);
 	directionalLight.diffuse = glm::vec3(0.7f, 0.7f, 0.7f);
 	directionalLight.specular = glm::vec3(1.f, 1.f, 1.f);
